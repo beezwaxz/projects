@@ -14,21 +14,25 @@ public class FindTheFactors {
 		
 		InputStreamReader cin = new InputStreamReader( System.in );		
 		BufferedReader reader = new BufferedReader( cin );
+		Set<Integer> factors = null;
 		int userNumber = -1;
 		while ( userNumber != 0 )
 		{
 			userNumber = getNumberFromUser( reader );
 			if ( userNumber > MIN_RANGE ) {
 				try {
-					Set<Integer> factors = getFactorsForNumber(userNumber );
-					if ( !factors.isEmpty()) {
-						for( Integer factor:factors ) {
+					factors = getFactorsForNumber(userNumber );
+					if ( factors != null)
+					{
+						if ( !factors.isEmpty()) {
 							System.out.printf("The factors for the number %d are:\n", userNumber);
-							System.out.printf("%d\n", factor);
+							for( Integer factor:factors ) {
+								System.out.printf("%d\n", factor);
+							}
+						} else {
+							System.out.printf("The number %d is prime", userNumber);
 						}
-					} else {
-						System.out.printf("The number %d is prime", userNumber);
-					}
+					}					
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
